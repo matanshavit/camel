@@ -1,0 +1,12 @@
+# Mac folder display files
+**/.DS_Store
+
+# dependencies
+**/node_modules
+
+# production builds
+**/build
+
+# package manage logs
+/yarn-debug.log*
+/yarn-error.log*
