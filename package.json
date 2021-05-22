@@ -6,7 +6,9 @@
   "author": "Matan Shavit <matanshavit@users.noreply.github.com>",
   "license": "MIT",
   "private": true,
-  "workspaces": [],
+  "workspaces": [
+    "client"
+  ],
   "devDependencies": {
     "eslint": "^7.27.0",
     "eslint-config-prettier": "^8.3.0",
@@ -19,6 +21,7 @@
     "*.{js,jsx,ts,tsx,json,css,md}": "prettier --write"
   },
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "start": "yarn workspace client start"
   }
 }
