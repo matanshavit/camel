@@ -47,3 +47,7 @@ Types for JavaScript
 ### [Material-UI](https://material-ui.com/)
 
 Front-end components for React
+
+### [Iconify](https://iconify.design/)
+
+Use icons from many popular icon sets
