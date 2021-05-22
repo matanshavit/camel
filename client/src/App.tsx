@@ -1,6 +1,8 @@
 import { CssBaseline } from "@material-ui/core";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
+import MainPage from "./pages/MainPage";
+
 const darkTheme = createMuiTheme({
   palette: {
     type: "dark",
@@ -10,7 +12,7 @@ const darkTheme = createMuiTheme({
 const App = () => (
   <ThemeProvider theme={darkTheme}>
     <CssBaseline />
-    <h1>Camel</h1>
+    <MainPage />
   </ThemeProvider>
 );
 
