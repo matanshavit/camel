@@ -2,7 +2,7 @@ import { AppBar, Toolbar, Typography, makeStyles } from "@material-ui/core";
 import { Icon } from "@iconify/react";
 import twoHumpCamel from "@iconify-icons/emojione/two-hump-camel";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   icon: {
     width: "2.75rem",
     height: "2.75rem",
@@ -11,20 +11,25 @@ const useStyles = makeStyles({
   title: {
     marginRight: "1.5rem",
   },
-});
+  offset: theme.mixins.toolbar,
+}));
 
 const PageTitleBar = () => {
   const styles = useStyles();
+
   return (
-    <AppBar color={"inherit"}>
-      <Toolbar>
-        <Icon icon={twoHumpCamel} className={styles.icon} />
-        <Typography variant="h4" className={styles.title}>
-          Camel
-        </Typography>
-        <Typography variant="h6">content management system</Typography>
-      </Toolbar>
-    </AppBar>
+    <>
+      <AppBar color="inherit">
+        <Toolbar>
+          <Icon icon={twoHumpCamel} className={styles.icon} />
+          <Typography variant="h4" className={styles.title}>
+            Camel
+          </Typography>
+          <Typography variant="h6">content management</Typography>
+        </Toolbar>
+      </AppBar>
+      <div className={styles.offset} />
+    </>
   );
 };
 
