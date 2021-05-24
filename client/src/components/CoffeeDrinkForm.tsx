@@ -1,4 +1,4 @@
-import { TextField } from "@material-ui/core";
+import { TextField, Input } from "@material-ui/core";
 
 import type CoffeeDrink from "../types/CoffeeDrink";
 
@@ -26,6 +26,7 @@ const CoffeeDrinkForm = ({ initialData }: CoffeeDrinkFormProps) => {
         margin="dense"
         defaultValue={initialData?.description}
       />
+      <Input id="id" type="hidden" defaultValue={initialData?.id} />
     </>
   );
 };
