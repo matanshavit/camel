@@ -11,6 +11,7 @@ import { Add as AddIcon } from "@material-ui/icons";
 import PageLayout from "./PageLayout";
 import PageGrid from "../components/PageGrid";
 import PageGridItem from "../components/PageGridItem";
+import type CoffeeDrink from "../types/CoffeeDrink";
 
 const useStyles = makeStyles((theme) => ({
   pageTitleBar: {
@@ -50,12 +51,7 @@ const PageTitleBar = ({ children }: PageTitleBarProps) => {
   );
 };
 
-interface ListGridCardProps {
-  name: string;
-  description: string;
-}
-
-const ListGridCard = ({ name, description }: ListGridCardProps) => {
+const ListGridCard = ({ name, description }: CoffeeDrink) => {
   const styles = useStyles();
 
   return (
@@ -72,7 +68,7 @@ const ListGridCard = ({ name, description }: ListGridCardProps) => {
   );
 };
 
-const items: ListGridCardProps[] = [
+const coffeeDrinks: CoffeeDrink[] = [
   {
     name: "Drip Brew",
     description:
@@ -131,8 +127,8 @@ const CoffeeDrinksPage = () => {
     <PageLayout>
       <PageTitleBar>Coffee Drinks</PageTitleBar>
       <PageGrid spacing={2}>
-        {items.map((item) => (
-          <ListGridCard {...item} />
+        {coffeeDrinks.map((coffeeDrink) => (
+          <ListGridCard {...coffeeDrink} />
         ))}
       </PageGrid>
     </PageLayout>
