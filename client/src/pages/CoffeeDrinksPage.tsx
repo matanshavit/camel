@@ -14,7 +14,7 @@ import CoffeeDrinksContext from "../contexts/CoffeeDrinksContext";
 import PageLayout from "./PageLayout";
 import PageGrid from "../components/PageGrid";
 import PageGridItem from "../components/PageGridItem";
-import AddCoffeeDrinkDialog from "../components/AddCoffeeDrinkDialog";
+import CoffeeDrinkDialog from "../components/CoffeeDrinkDialog";
 import type CoffeeDrink from "../types/CoffeeDrink";
 
 const useStyles = makeStyles((theme) => ({
@@ -101,9 +101,11 @@ const CoffeeDrinksPage = () => {
         </PageGrid>
       </PageLayout>
 
-      <AddCoffeeDrinkDialog
+      <CoffeeDrinkDialog
         open={addDialoglOpen}
         handleClose={closeAddDialog}
+        title="Add Coffee Drink"
+        saveLabel="Add"
       />
     </>
   );

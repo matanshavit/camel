@@ -20,24 +20,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-interface AddCoffeeDrinkDialogProps {
+interface CoffeeDrinkDialogProps {
   open: boolean;
   handleClose: React.MouseEventHandler;
+  title: string;
+  saveLabel: string;
 }
 
-const AddCoffeeDrinkDialog = ({
+const CoffeeDrinkDialog = ({
   open,
   handleClose,
-}: AddCoffeeDrinkDialogProps) => {
+  title,
+  saveLabel,
+}: CoffeeDrinkDialogProps) => {
   const classes = useStyles();
   return (
     <Dialog
       open={open}
       onClose={handleClose}
-      aria-labelledby="add-coffee-drink-dialog-title"
+      aria-labelledby="coffee-drink-dialog-title"
     >
-      <DialogTitle id="add-coffee-drink-dialog-title">
-        Add Coffee Drink
+      <DialogTitle id="coffee-drink-dialog-title">
+        {title}
         <IconButton
           aria-label="close"
           className={classes.closeButton}
@@ -56,11 +60,11 @@ const AddCoffeeDrinkDialog = ({
           color="primary"
           disableElevation
         >
-          Add
+          {saveLabel}
         </Button>
       </DialogActions>
     </Dialog>
   );
 };
 
-export default AddCoffeeDrinkDialog;
+export default CoffeeDrinkDialog;
