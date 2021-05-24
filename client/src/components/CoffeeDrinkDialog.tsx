@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -37,6 +38,16 @@ const CoffeeDrinkDialog = ({
   initialData,
 }: CoffeeDrinkDialogProps) => {
   const classes = useStyles();
+  const form = useRef(null);
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    const formData = Object.fromEntries(
+      new FormData(form.current || undefined)
+    );
+    alert(JSON.stringify(formData));
+  };
+
   return (
     <Dialog
       open={open}
@@ -53,19 +64,21 @@ const CoffeeDrinkDialog = ({
           <CloseIcon />
         </IconButton>
       </DialogTitle>
-      <DialogContent>
-        <CoffeeDrinkForm initialData={initialData} />
-      </DialogContent>
-      <DialogActions>
-        <Button
-          onClick={handleClose}
-          variant="contained"
-          color="primary"
-          disableElevation
-        >
-          {saveLabel}
-        </Button>
-      </DialogActions>
+      <form ref={form} onSubmit={handleSubmit}>
+        <DialogContent>
+          <CoffeeDrinkForm initialData={initialData} />
+        </DialogContent>
+        <DialogActions>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            disableElevation
+          >
+            {saveLabel}
+          </Button>
+        </DialogActions>
+      </form>
     </Dialog>
   );
 };

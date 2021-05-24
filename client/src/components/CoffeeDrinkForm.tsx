@@ -11,6 +11,7 @@ const CoffeeDrinkForm = ({ initialData }: CoffeeDrinkFormProps) => {
     <>
       <TextField
         id="name"
+        name="name"
         label="Name"
         type="text"
         fullWidth
@@ -19,6 +20,7 @@ const CoffeeDrinkForm = ({ initialData }: CoffeeDrinkFormProps) => {
       />
       <TextField
         id="description"
+        name="description"
         label="Description"
         type="text"
         fullWidth
@@ -26,7 +28,9 @@ const CoffeeDrinkForm = ({ initialData }: CoffeeDrinkFormProps) => {
         margin="dense"
         defaultValue={initialData?.description}
       />
-      <Input id="id" type="hidden" defaultValue={initialData?.id} />
+      {initialData?.id && (
+        <Input id="id" name="id" type="hidden" defaultValue={initialData?.id} />
+      )}
     </>
   );
 };
