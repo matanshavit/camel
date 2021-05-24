@@ -117,6 +117,7 @@ const CoffeeDrinksPage = () => {
         <PageGrid spacing={2}>
           {coffeeDrinks.map((coffeeDrink) => (
             <ListGridCard
+              key={coffeeDrink.id}
               {...coffeeDrink}
               onClick={() => openEditDialog(coffeeDrink)}
             />

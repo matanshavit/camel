@@ -13,7 +13,6 @@ import { Close as CloseIcon } from "@material-ui/icons";
 import CoffeeDrinkForm from "./CoffeeDrinkForm";
 import CoffeeDrinksContext from "../contexts/CoffeeDrinksContext";
 import type CoffeeDrink from "../types/CoffeeDrink";
-import type CoffeeDrinkParameters from "../types/CoffeeDrinkParameters";
 
 const useStyles = makeStyles((theme) => ({
   closeButton: {
@@ -45,13 +44,19 @@ const CoffeeDrinkDialog = ({
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    const formData = Object.fromEntries(
-      new FormData(form.current || undefined)
-    );
-    if ("id" in formData) {
-      editCoffeeDrink(formData as unknown as CoffeeDrink);
+    const formData = new FormData(form.current || undefined);
+    const coffeeDrinkParameters = {
+      name: formData.get("name") as string,
+      description: formData.get("description") as string,
+    };
+    if (formData.has("id")) {
+      const coffeeDrink = {
+        id: parseInt(formData.get("id") as string),
+        ...coffeeDrinkParameters,
+      };
+      editCoffeeDrink(coffeeDrink);
     } else {
-      addCoffeeDrink(formData as unknown as CoffeeDrinkParameters);
+      addCoffeeDrink(coffeeDrinkParameters);
     }
     handleClose(event);
   };

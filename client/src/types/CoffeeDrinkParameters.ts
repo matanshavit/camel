@@ -1,6 +1,6 @@
-interface CoffeeDrinkParams {
+interface CoffeeDrinkParameters {
   name: string;
   description: string;
 }
 
-export default CoffeeDrinkParams;
+export default CoffeeDrinkParameters;

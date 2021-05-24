@@ -17,7 +17,17 @@ const CoffeeDrinksContextProvider = ({
     const id = coffeeDrinks[coffeeDrinks.length - 1].id + 1;
     setCoffeeDrinks((initial) => [...initial, { id, ...coffeeDrink }]);
   };
-  const editCoffeeDrink = (coffeeDrink: CoffeeDrink) => {};
+  const editCoffeeDrink = (coffeeDrink: CoffeeDrink) => {
+    const index = coffeeDrinks.findIndex(
+      (initialDrink) => initialDrink.id === coffeeDrink.id
+    );
+
+    setCoffeeDrinks((initial) => [
+      ...initial.slice(0, index),
+      coffeeDrink,
+      ...initial.slice(index + 1),
+    ]);
+  };
 
   return (
     <CoffeeDrinksContext.Provider
