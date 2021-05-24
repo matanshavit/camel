@@ -1,7 +1,7 @@
 import { CssBaseline } from "@material-ui/core";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
-import MainPage from "./pages/MainPage";
+import CoffeeDrinksPage from "./pages/CoffeeDrinksPage";
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -12,7 +12,7 @@ const darkTheme = createMuiTheme({
 const App = () => (
   <ThemeProvider theme={darkTheme}>
     <CssBaseline />
-    <MainPage />
+    <CoffeeDrinksPage />
   </ThemeProvider>
 );
 

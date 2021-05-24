@@ -1,8 +1,8 @@
 import {
+  Grid,
   Card,
   CardContent,
   Typography,
-  Grid,
   IconButton,
   makeStyles,
 } from "@material-ui/core";
@@ -19,22 +19,48 @@ const useStyles = makeStyles((theme) => ({
   pageTitle: {
     marginRight: theme.spacing(1),
   },
+  listCard: {
+    height: "100%",
+  },
   cardSpacing: {
     marginTop: theme.spacing(1),
   },
 }));
 
-interface ItemGridCardProps {
+interface PageTitleBarProps {
+  children: React.ReactNode;
+}
+
+const PageTitleBar = ({ children }: PageTitleBarProps) => {
+  const styles = useStyles();
+
+  return (
+    <Grid container alignItems="center" className={styles.pageTitleBar}>
+      <Grid item>
+        <Typography variant="h4" className={styles.pageTitle}>
+          {children}
+        </Typography>
+      </Grid>
+      <Grid item>
+        <IconButton aria-label="add">
+          <AddIcon />
+        </IconButton>
+      </Grid>
+    </Grid>
+  );
+};
+
+interface ListGridCardProps {
   name: string;
   description: string;
 }
 
-const ItemGridCard = ({ name, description }: ItemGridCardProps) => {
+const ListGridCard = ({ name, description }: ListGridCardProps) => {
   const styles = useStyles();
 
   return (
     <PageGridItem>
-      <Card>
+      <Card className={styles.listCard}>
         <CardContent>
           <Typography variant="h5">{name}</Typography>
           <Typography variant="body2" className={styles.cardSpacing}>
@@ -46,37 +72,24 @@ const ItemGridCard = ({ name, description }: ItemGridCardProps) => {
   );
 };
 
-const items: ItemGridCardProps[] = [
+const items: ListGridCardProps[] = [
   {
     name: "Cortado",
-    description: "espresso mixed with a roughly equal amount of warm milk",
+    description: "Espresso mixed with a roughly equal amount of warm milk.",
   },
 ];
 
-const MainPage = () => {
-  const styles = useStyles();
-
+const CoffeeDrinksPage = () => {
   return (
     <PageLayout>
-      <Grid container alignItems="center" className={styles.pageTitleBar}>
-        <Grid item>
-          <Typography variant="h4" className={styles.pageTitle}>
-            Coffee Drinks
-          </Typography>
-        </Grid>
-        <Grid item>
-          <IconButton aria-label="delete">
-            <AddIcon />
-          </IconButton>
-        </Grid>
-      </Grid>
+      <PageTitleBar>Coffee Drinks</PageTitleBar>
       <PageGrid spacing={2}>
         {items.map((item) => (
-          <ItemGridCard {...item} />
+          <ListGridCard {...item} />
         ))}
       </PageGrid>
     </PageLayout>
   );
 };
 
-export default MainPage;
+export default CoffeeDrinksPage;
