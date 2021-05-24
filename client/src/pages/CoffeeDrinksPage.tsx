@@ -36,12 +36,12 @@ interface PageTitleBarProps {
 }
 
 const PageTitleBar = ({ children }: PageTitleBarProps) => {
-  const styles = useStyles();
+  const classes = useStyles();
 
   return (
-    <Grid container alignItems="center" className={styles.pageTitleBar}>
+    <Grid container alignItems="center" className={classes.pageTitleBar}>
       <Grid item>
-        <Typography variant="h4" className={styles.pageTitle}>
+        <Typography variant="h4" className={classes.pageTitle}>
           {children}
         </Typography>
       </Grid>
@@ -55,15 +55,15 @@ const PageTitleBar = ({ children }: PageTitleBarProps) => {
 };
 
 const ListGridCard = ({ name, description }: CoffeeDrink) => {
-  const styles = useStyles();
+  const classes = useStyles();
 
   return (
     <PageGridItem>
-      <Card className={styles.fullHeight}>
-        <CardActionArea className={styles.fullHeight}>
-          <CardContent className={styles.fullHeight}>
+      <Card className={classes.fullHeight}>
+        <CardActionArea className={classes.fullHeight}>
+          <CardContent className={classes.fullHeight}>
             <Typography variant="h5">{name}</Typography>
-            <Typography variant="body2" className={styles.cardSpacing}>
+            <Typography variant="body2" className={classes.cardSpacing}>
               {description}
             </Typography>
           </CardContent>

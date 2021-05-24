@@ -15,20 +15,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PageTitleBar = () => {
-  const styles = useStyles();
+  const classes = useStyles();
 
   return (
     <>
       <AppBar color="inherit">
         <Toolbar>
-          <Icon icon={twoHumpCamel} className={styles.icon} />
-          <Typography variant="h4" className={styles.title}>
+          <Icon icon={twoHumpCamel} className={classes.icon} />
+          <Typography variant="h4" className={classes.title}>
             Camel
           </Typography>
           <Typography variant="h6">content management</Typography>
         </Toolbar>
       </AppBar>
-      <div className={styles.offset} />
+      <div className={classes.offset} />
     </>
   );
 };

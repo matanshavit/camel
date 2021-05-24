@@ -18,10 +18,10 @@ const PageGrid = ({ children, spacing }: PageGridProps) => {
     [spacing]
   );
 
-  const styles = useStyles();
+  const classes = useStyles();
 
   return (
-    <div className={styles.content}>
+    <div className={classes.content}>
       <Grid container spacing={spacing}>
         {children}
       </Grid>
