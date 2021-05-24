@@ -3,6 +3,7 @@ import {
   Grid,
   Card,
   CardContent,
+  CardActionArea,
   Typography,
   IconButton,
   makeStyles,
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   pageTitle: {
     marginRight: theme.spacing(1),
   },
-  listCard: {
+  fullHeight: {
     height: "100%",
   },
   cardSpacing: {
@@ -58,13 +59,15 @@ const ListGridCard = ({ name, description }: CoffeeDrink) => {
 
   return (
     <PageGridItem>
-      <Card className={styles.listCard}>
-        <CardContent>
-          <Typography variant="h5">{name}</Typography>
-          <Typography variant="body2" className={styles.cardSpacing}>
-            {description}
-          </Typography>
-        </CardContent>
+      <Card className={styles.fullHeight}>
+        <CardActionArea className={styles.fullHeight}>
+          <CardContent className={styles.fullHeight}>
+            <Typography variant="h5">{name}</Typography>
+            <Typography variant="body2" className={styles.cardSpacing}>
+              {description}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
       </Card>
     </PageGridItem>
   );
