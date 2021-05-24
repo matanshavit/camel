@@ -10,6 +10,7 @@ import {
 import { Close as CloseIcon } from "@material-ui/icons";
 
 import CoffeeDrinkForm from "./CoffeeDrinkForm";
+import type CoffeeDrink from "../types/CoffeeDrink";
 
 const useStyles = makeStyles((theme) => ({
   closeButton: {
@@ -25,6 +26,7 @@ interface CoffeeDrinkDialogProps {
   handleClose: React.MouseEventHandler;
   title: string;
   saveLabel: string;
+  initialData?: CoffeeDrink;
 }
 
 const CoffeeDrinkDialog = ({
@@ -32,6 +34,7 @@ const CoffeeDrinkDialog = ({
   handleClose,
   title,
   saveLabel,
+  initialData,
 }: CoffeeDrinkDialogProps) => {
   const classes = useStyles();
   return (
@@ -51,7 +54,7 @@ const CoffeeDrinkDialog = ({
         </IconButton>
       </DialogTitle>
       <DialogContent>
-        <CoffeeDrinkForm />
+        <CoffeeDrinkForm initialData={initialData} />
       </DialogContent>
       <DialogActions>
         <Button

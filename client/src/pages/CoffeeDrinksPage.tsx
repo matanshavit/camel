@@ -56,13 +56,17 @@ const PageTitleBar = ({ children, handleClickAdd }: PageTitleBarProps) => {
   );
 };
 
-const ListGridCard = ({ name, description }: CoffeeDrink) => {
+interface ListGridCardProps extends CoffeeDrink {
+  onClick: React.MouseEventHandler;
+}
+
+const ListGridCard = ({ name, description, onClick }: ListGridCardProps) => {
   const classes = useStyles();
 
   return (
     <PageGridItem>
       <Card className={classes.fullHeight}>
-        <CardActionArea className={classes.fullHeight}>
+        <CardActionArea className={classes.fullHeight} onClick={onClick}>
           <CardContent className={classes.fullHeight}>
             <Typography variant="h5">{name}</Typography>
             <Typography variant="body2" className={classes.cardSpacing}>
@@ -88,6 +92,22 @@ const CoffeeDrinksPage = () => {
     setAddDialogOpen(false);
   }, [setAddDialogOpen]);
 
+  const [editDialoglOpen, setEditDialogOpen] = useState(false);
+  const [editItem, setEditItem] = useState(undefined);
+
+  const openEditDialog = useCallback(
+    (coffeeDrink) => {
+      setEditItem(coffeeDrink);
+      setEditDialogOpen(true);
+    },
+    [setEditDialogOpen]
+  );
+
+  const closeEditDialog = useCallback(() => {
+    setEditItem(undefined);
+    setEditDialogOpen(false);
+  }, [setEditDialogOpen]);
+
   return (
     <>
       <PageLayout>
@@ -96,7 +116,10 @@ const CoffeeDrinksPage = () => {
         </PageTitleBar>
         <PageGrid spacing={2}>
           {coffeeDrinks.map((coffeeDrink) => (
-            <ListGridCard {...coffeeDrink} />
+            <ListGridCard
+              {...coffeeDrink}
+              onClick={() => openEditDialog(coffeeDrink)}
+            />
           ))}
         </PageGrid>
       </PageLayout>
@@ -106,6 +129,14 @@ const CoffeeDrinksPage = () => {
         handleClose={closeAddDialog}
         title="Add Coffee Drink"
         saveLabel="Add"
+      />
+
+      <CoffeeDrinkDialog
+        open={editDialoglOpen}
+        handleClose={closeEditDialog}
+        title="Edit Coffee Drink"
+        saveLabel="Save"
+        initialData={editItem}
       />
     </>
   );

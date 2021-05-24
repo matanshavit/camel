@@ -1,9 +1,22 @@
 import { TextField } from "@material-ui/core";
 
-const CoffeeDrinkForm = () => {
+import type CoffeeDrink from "../types/CoffeeDrink";
+
+interface CoffeeDrinkFormProps {
+  initialData?: CoffeeDrink;
+}
+
+const CoffeeDrinkForm = ({ initialData }: CoffeeDrinkFormProps) => {
   return (
     <>
-      <TextField id="name" label="Name" type="text" fullWidth margin="dense" />
+      <TextField
+        id="name"
+        label="Name"
+        type="text"
+        fullWidth
+        margin="dense"
+        defaultValue={initialData?.name}
+      />
       <TextField
         id="description"
         label="Description"
@@ -11,6 +24,7 @@ const CoffeeDrinkForm = () => {
         fullWidth
         multiline
         margin="dense"
+        defaultValue={initialData?.description}
       />
     </>
   );
