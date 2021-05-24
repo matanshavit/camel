@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -11,7 +11,9 @@ import {
 import { Close as CloseIcon } from "@material-ui/icons";
 
 import CoffeeDrinkForm from "./CoffeeDrinkForm";
+import CoffeeDrinksContext from "../contexts/CoffeeDrinksContext";
 import type CoffeeDrink from "../types/CoffeeDrink";
+import type CoffeeDrinkParameters from "../types/CoffeeDrinkParameters";
 
 const useStyles = makeStyles((theme) => ({
   closeButton: {
@@ -24,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 interface CoffeeDrinkDialogProps {
   open: boolean;
-  handleClose: React.MouseEventHandler;
+  handleClose: React.ReactEventHandler;
   title: string;
   saveLabel: string;
   initialData?: CoffeeDrink;
@@ -39,13 +41,19 @@ const CoffeeDrinkDialog = ({
 }: CoffeeDrinkDialogProps) => {
   const classes = useStyles();
   const form = useRef(null);
+  const { addCoffeeDrink, editCoffeeDrink } = useContext(CoffeeDrinksContext);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     const formData = Object.fromEntries(
       new FormData(form.current || undefined)
     );
-    alert(JSON.stringify(formData));
+    if ("id" in formData) {
+      editCoffeeDrink(formData as unknown as CoffeeDrink);
+    } else {
+      addCoffeeDrink(formData as unknown as CoffeeDrinkParameters);
+    }
+    handleClose(event);
   };
 
   return (

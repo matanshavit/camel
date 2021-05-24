@@ -1,10 +1,11 @@
 import { createContext } from "react";
 
 import type CoffeeDrink from "../../types/CoffeeDrink";
+import type CoffeeDrinkParameters from "../../types/CoffeeDrinkParameters";
 
 interface CoffeeDrinksContextProps {
   coffeeDrinks: CoffeeDrink[];
-  addCoffeeDrink: (coffeeDrink: CoffeeDrink) => void;
+  addCoffeeDrink: (coffeeDrink: CoffeeDrinkParameters) => void;
   editCoffeeDrink: (coffeeDrink: CoffeeDrink) => void;
 }
 

@@ -1,7 +1,7 @@
-interface CoffeeDrink {
+import CoffeeDrinkParameters from "./CoffeeDrinkParameters";
+
+interface CoffeeDrink extends CoffeeDrinkParameters {
   id: number;
-  name: string;
-  description: string;
 }
 
 export default CoffeeDrink;
