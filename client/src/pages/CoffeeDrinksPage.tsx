@@ -74,8 +74,55 @@ const ListGridCard = ({ name, description }: ListGridCardProps) => {
 
 const items: ListGridCardProps[] = [
   {
+    name: "Drip Brew",
+    description:
+      "Made by pouring hot water onto ground coffee beans, then allowing to brew and filtering.",
+  },
+  {
+    name: "Cold Brew",
+    description:
+      "Coarse-ground beans are soaked in water for about 12 to 24 hours. The water is normally kept at room temperature, but chilled water can also be used.",
+  },
+  {
+    name: "Espresso",
+    description:
+      "Method of Italian origin in which a small amount of nearly boiling water is forced under pressure (expressed) through finely-ground coffee beans.",
+  },
+  {
+    name: "Ristretto",
+    description:
+      "Short shot of a more highly concentrated espresso coffee. Made with the same amount of ground coffee, but extracted with a finer grind using half as much water.",
+  },
+  {
+    name: "Caffè Macchiato",
+    description:
+      "Espresso coffee drink with a small amount of milk, usually foamed.",
+  },
+  {
     name: "Cortado",
     description: "Espresso mixed with a roughly equal amount of warm milk.",
+  },
+  {
+    name: "Caffe Latte",
+    description: "Espresso and steamed milk.",
+  },
+  {
+    name: "Cappuccino",
+    description: "Espresso with with steamed milk foam",
+  },
+  {
+    name: "Café au Lait",
+    description: "Coffee with hot milk added",
+  },
+  {
+    name: "Caffè Americano",
+    description:
+      "Diluted espresso with hot water, giving it a similar strength to, but different flavor from, traditionally brewed coffee.",
+  },
+  {
+    name: "Affogato",
+    description:
+      "A scoop of vanilla gelato topped with a shot of hot espresso.",
   },
 ];
 
