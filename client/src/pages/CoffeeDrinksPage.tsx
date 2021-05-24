@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState, useCallback } from "react";
 import {
   Grid,
   Card,
@@ -10,10 +10,11 @@ import {
 } from "@material-ui/core";
 import { Add as AddIcon } from "@material-ui/icons";
 
+import CoffeeDrinksContext from "../contexts/CoffeeDrinksContext";
 import PageLayout from "./PageLayout";
 import PageGrid from "../components/PageGrid";
 import PageGridItem from "../components/PageGridItem";
-import CoffeeDrinksContext from "../contexts/CoffeeDrinksContext";
+import AddCoffeeDrinkDialog from "../components/AddCoffeeDrinkDialog";
 import type CoffeeDrink from "../types/CoffeeDrink";
 
 const useStyles = makeStyles((theme) => ({
@@ -33,9 +34,10 @@ const useStyles = makeStyles((theme) => ({
 
 interface PageTitleBarProps {
   children: React.ReactNode;
+  handleClickAdd: React.MouseEventHandler;
 }
 
-const PageTitleBar = ({ children }: PageTitleBarProps) => {
+const PageTitleBar = ({ children, handleClickAdd }: PageTitleBarProps) => {
   const classes = useStyles();
 
   return (
@@ -46,7 +48,7 @@ const PageTitleBar = ({ children }: PageTitleBarProps) => {
         </Typography>
       </Grid>
       <Grid item>
-        <IconButton aria-label="add">
+        <IconButton aria-label="add" onClick={handleClickAdd}>
           <AddIcon />
         </IconButton>
       </Grid>
@@ -75,15 +77,35 @@ const ListGridCard = ({ name, description }: CoffeeDrink) => {
 
 const CoffeeDrinksPage = () => {
   const { coffeeDrinks } = useContext(CoffeeDrinksContext);
+
+  const [addDialoglOpen, setAddDialogOpen] = useState(false);
+
+  const openAddDialog = useCallback(() => {
+    setAddDialogOpen(true);
+  }, [setAddDialogOpen]);
+
+  const closeAddDialog = useCallback(() => {
+    setAddDialogOpen(false);
+  }, [setAddDialogOpen]);
+
   return (
-    <PageLayout>
-      <PageTitleBar>Coffee Drinks</PageTitleBar>
-      <PageGrid spacing={2}>
-        {coffeeDrinks.map((coffeeDrink) => (
-          <ListGridCard {...coffeeDrink} />
-        ))}
-      </PageGrid>
-    </PageLayout>
+    <>
+      <PageLayout>
+        <PageTitleBar handleClickAdd={openAddDialog}>
+          Coffee Drinks
+        </PageTitleBar>
+        <PageGrid spacing={2}>
+          {coffeeDrinks.map((coffeeDrink) => (
+            <ListGridCard {...coffeeDrink} />
+          ))}
+        </PageGrid>
+      </PageLayout>
+
+      <AddCoffeeDrinkDialog
+        open={addDialoglOpen}
+        handleClose={closeAddDialog}
+      />
+    </>
   );
 };
 
