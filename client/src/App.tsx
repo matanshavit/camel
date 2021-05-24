@@ -2,6 +2,7 @@ import { CssBaseline } from "@material-ui/core";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 import CoffeeDrinksPage from "./pages/CoffeeDrinksPage";
+import CoffeeDrinksContextProvider from "./contexts/CoffeeDrinksContext/Provider";
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -12,7 +13,9 @@ const darkTheme = createMuiTheme({
 const App = () => (
   <ThemeProvider theme={darkTheme}>
     <CssBaseline />
-    <CoffeeDrinksPage />
+    <CoffeeDrinksContextProvider>
+      <CoffeeDrinksPage />
+    </CoffeeDrinksContextProvider>
   </ThemeProvider>
 );
 
