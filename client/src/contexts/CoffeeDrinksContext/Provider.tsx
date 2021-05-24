@@ -14,7 +14,9 @@ const CoffeeDrinksContextProvider = ({
   const [coffeeDrinks, setCoffeeDrinks] = useState(initialCoffeeDrinks);
 
   const addCoffeeDrink = (coffeeDrink: CoffeeDrinkParameters) => {
-    const id = coffeeDrinks[coffeeDrinks.length - 1].id + 1;
+    const id = (
+      parseInt(coffeeDrinks[coffeeDrinks.length - 1].id) + 1
+    ).toString();
     setCoffeeDrinks((initial) => [...initial, { id, ...coffeeDrink }]);
   };
   const editCoffeeDrink = (coffeeDrink: CoffeeDrink) => {

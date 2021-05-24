@@ -4,9 +4,10 @@ import type CoffeeDrink from "../types/CoffeeDrink";
 
 interface CoffeeDrinkFormProps {
   initialData?: CoffeeDrink;
+  register: () => void;
 }
 
-const CoffeeDrinkForm = ({ initialData }: CoffeeDrinkFormProps) => {
+const CoffeeDrinkForm = ({ initialData, register }: CoffeeDrinkFormProps) => {
   return (
     <>
       <TextField
@@ -17,6 +18,7 @@ const CoffeeDrinkForm = ({ initialData }: CoffeeDrinkFormProps) => {
         fullWidth
         margin="dense"
         defaultValue={initialData?.name}
+        inputRef={register}
       />
       <TextField
         id="description"
@@ -27,9 +29,16 @@ const CoffeeDrinkForm = ({ initialData }: CoffeeDrinkFormProps) => {
         multiline
         margin="dense"
         defaultValue={initialData?.description}
+        inputRef={register}
       />
       {initialData?.id && (
-        <Input id="id" name="id" type="hidden" defaultValue={initialData?.id} />
+        <Input
+          id="id"
+          name="id"
+          type="hidden"
+          defaultValue={initialData?.id}
+          inputRef={register}
+        />
       )}
     </>
   );

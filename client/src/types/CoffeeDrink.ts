@@ -1,7 +1,7 @@
 import CoffeeDrinkParameters from "./CoffeeDrinkParameters";
 
 interface CoffeeDrink extends CoffeeDrinkParameters {
-  id: number;
+  id: string;
 }
 
 export default CoffeeDrink;

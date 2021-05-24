@@ -1,4 +1,4 @@
-import { useRef, useContext } from "react";
+import React, { useContext } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -9,10 +9,12 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import { Close as CloseIcon } from "@material-ui/icons";
+import { useForm } from "react-hook-form";
 
 import CoffeeDrinkForm from "./CoffeeDrinkForm";
 import CoffeeDrinksContext from "../contexts/CoffeeDrinksContext";
 import type CoffeeDrink from "../types/CoffeeDrink";
+import type CoffeeDrinkParameters from "../types/CoffeeDrinkParameters";
 
 const useStyles = makeStyles((theme) => ({
   closeButton: {
@@ -39,25 +41,19 @@ const CoffeeDrinkDialog = ({
   initialData,
 }: CoffeeDrinkDialogProps) => {
   const classes = useStyles();
-  const form = useRef(null);
+  const { register, handleSubmit } = useForm();
   const { addCoffeeDrink, editCoffeeDrink } = useContext(CoffeeDrinksContext);
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    const formData = new FormData(form.current || undefined);
-    const coffeeDrinkParameters = {
-      name: formData.get("name") as string,
-      description: formData.get("description") as string,
-    };
-    if (formData.has("id")) {
-      const coffeeDrink = {
-        id: parseInt(formData.get("id") as string),
-        ...coffeeDrinkParameters,
-      };
-      editCoffeeDrink(coffeeDrink);
+  const submitData = handleSubmit((data) => {
+    if ("id" in data) {
+      editCoffeeDrink(data as CoffeeDrink);
     } else {
-      addCoffeeDrink(coffeeDrinkParameters);
+      addCoffeeDrink(data as CoffeeDrinkParameters);
     }
+  });
+
+  const onSubmit = (event: React.FormEvent) => {
+    submitData(event);
     handleClose(event);
   };
 
@@ -77,9 +73,9 @@ const CoffeeDrinkDialog = ({
           <CloseIcon />
         </IconButton>
       </DialogTitle>
-      <form ref={form} onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit}>
         <DialogContent>
-          <CoffeeDrinkForm initialData={initialData} />
+          <CoffeeDrinkForm initialData={initialData} register={register} />
         </DialogContent>
         <DialogActions>
           <Button
