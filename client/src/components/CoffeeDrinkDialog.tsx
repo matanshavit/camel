@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import { Close as CloseIcon } from "@material-ui/icons";
 import { useForm } from "react-hook-form";
+import * as yup from "yup";
 
 import CoffeeDrinkForm from "./CoffeeDrinkForm";
 import CoffeeDrinksContext from "../contexts/CoffeeDrinksContext";
@@ -25,9 +26,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const CoffeeDrinkSchema = yup.object().shape({
+  name: yup.string().required("Required"),
+  description: yup.string().required("Required"),
+});
+
 interface CoffeeDrinkDialogProps {
   open: boolean;
-  handleClose: React.ReactEventHandler;
+  handleClose: (event: object) => void;
   title: string;
   saveLabel: string;
   initialData?: CoffeeDrink;
@@ -41,21 +47,21 @@ const CoffeeDrinkDialog = ({
   initialData,
 }: CoffeeDrinkDialogProps) => {
   const classes = useStyles();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm({
+    validationSchema: CoffeeDrinkSchema,
+  });
   const { addCoffeeDrink, editCoffeeDrink } = useContext(CoffeeDrinksContext);
 
-  const submitData = handleSubmit((data) => {
+  const onSubmit = handleSubmit((data, event) => {
     if ("id" in data) {
       editCoffeeDrink(data as CoffeeDrink);
     } else {
       addCoffeeDrink(data as CoffeeDrinkParameters);
     }
+    if (event) {
+      handleClose(event);
+    }
   });
-
-  const onSubmit = (event: React.FormEvent) => {
-    submitData(event);
-    handleClose(event);
-  };
 
   return (
     <Dialog
@@ -75,7 +81,11 @@ const CoffeeDrinkDialog = ({
       </DialogTitle>
       <form onSubmit={onSubmit}>
         <DialogContent>
-          <CoffeeDrinkForm initialData={initialData} register={register} />
+          <CoffeeDrinkForm
+            initialData={initialData}
+            register={register}
+            errors={errors}
+          />
         </DialogContent>
         <DialogActions>
           <Button

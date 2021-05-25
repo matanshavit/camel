@@ -55,3 +55,7 @@ Use icons from many popular icon sets
 ### [React Hook Form @ v5](https://react-hook-form.com/v5/api/)
 
 Hooks to make using forms easier with React components. The oldest supported version.
+
+### [Yup](https://github.com/jquense/yup)
+
+Form validation with schemas

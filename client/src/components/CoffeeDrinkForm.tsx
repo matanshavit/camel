@@ -1,13 +1,19 @@
 import { TextField, Input } from "@material-ui/core";
+import type { NestDataObject, FieldValues, FieldError } from "react-hook-form";
 
 import type CoffeeDrink from "../types/CoffeeDrink";
 
 interface CoffeeDrinkFormProps {
   initialData?: CoffeeDrink;
   register: () => void;
+  errors: NestDataObject<FieldValues, FieldError>;
 }
 
-const CoffeeDrinkForm = ({ initialData, register }: CoffeeDrinkFormProps) => {
+const CoffeeDrinkForm = ({
+  initialData,
+  register,
+  errors,
+}: CoffeeDrinkFormProps) => {
   return (
     <>
       <TextField
@@ -19,6 +25,8 @@ const CoffeeDrinkForm = ({ initialData, register }: CoffeeDrinkFormProps) => {
         margin="dense"
         defaultValue={initialData?.name}
         inputRef={register}
+        error={"name" in errors}
+        helperText={errors.name?.message}
       />
       <TextField
         id="description"
@@ -30,6 +38,8 @@ const CoffeeDrinkForm = ({ initialData, register }: CoffeeDrinkFormProps) => {
         margin="dense"
         defaultValue={initialData?.description}
         inputRef={register}
+        error={"description" in errors}
+        helperText={errors.description?.message}
       />
       {initialData?.id && (
         <Input
